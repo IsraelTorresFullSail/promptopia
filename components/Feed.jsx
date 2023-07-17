@@ -31,6 +31,7 @@ const Feed = () => {
 
       setPosts(data)
     }
+    fetchPosts()
   }, [])
 
   return (
