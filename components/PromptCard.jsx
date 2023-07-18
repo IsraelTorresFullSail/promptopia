@@ -10,16 +10,12 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const pathName = usePathname()
   const router = useRouter()
 
-  console.log(post.creator)
-
   const [copied, setCopied] = useState('')
 
   const handleProfileClick = () => {
-    console.log(post)
+    if (post.creator?._id === session?.user.id) return router.push('/profile')
 
-    if (post.creator._id === session?.user.id) return router.push('/profile')
-
-    router.push(`/profile/${post.creator._id}?name=${post.creator.username}`)
+    router.push(`/profile/${post.creator?._id}?name=${post.creator?.username}`)
   }
 
   const handleCopy = () => {
@@ -36,7 +32,7 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
           onClick={handleProfileClick}
         >
           <Image
-            src={post.creator?.image}
+            src={post.creator?.image || '/assets/images/logo.svg'}
             alt='user_image'
             width={40}
             height={40}
